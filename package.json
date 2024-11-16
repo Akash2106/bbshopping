@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
+    "fs": "^0.0.1-security",
     "mysql": "^2.18.1",
     "mysql2": "^3.11.4",
     "pg": "^8.12.0"
