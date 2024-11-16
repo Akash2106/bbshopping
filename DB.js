@@ -6,7 +6,8 @@ const pool = mysql.createPool({
   host: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com',            // Replace with your database host (e.g., localhost or an IP address)
   database: 'test',     // Replace with your database name
   password: 'CLFj4ZtC0s9Qmh9U', // Replace with your database password 
-  port:4000
+  port:4000,
+  CA: './isrgrootx1.pem'
 });
 
 // Export the pool for use in other parts of your application
