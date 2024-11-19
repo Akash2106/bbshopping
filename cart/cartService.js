@@ -26,7 +26,7 @@ const ViewCart= async(req,res)=>{
       }
 }
 
-const removeCart= async(req,res)=>{
+const UpdateCart= async(req,res)=>{
   try{
     const {userId,productId,quantity}= req.body;
     if(quantity==0){
@@ -46,4 +46,17 @@ const removeCart= async(req,res)=>{
     res.status(500).send('Error querying database');
   }
 }
-module.exports={AddCart,ViewCart,removeCart}
+
+const RemoveCart= async (req,res)=>{
+  try{
+    const userId=req.params.id;
+    const [result]=await pool.query(`DELETE FROM cart WHERE userId =${userId}`);
+    res.status(200).json(result);
+  }
+
+  catch(err){
+    console.error(err);
+    res.status(500).send('Error querying database');
+  }
+}
+module.exports={AddCart,ViewCart,UpdateCart,RemoveCart};
