@@ -17,7 +17,7 @@ const AddCart= async(req,res)=>{
 const ViewCart= async(req,res)=>{
     try{
         const userId = req.params.id;
-        const [result] = await pool.query(`SELECT * FROM cart WHERE userId = ${userId}`);
+        const [result] = await pool.query(`SELECT * FROM cart RIGHT JOIN products ON cart.productId=products.productId WHERE test.cart.userId=${userId}`);
         res.status(200).json(result);
       }
       catch(err){

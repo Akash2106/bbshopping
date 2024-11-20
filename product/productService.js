@@ -1,3 +1,4 @@
+const { response } = require("express");
 const pool = require("../DB");
 
 
@@ -15,12 +16,22 @@ const GetAllproducts=async (req,res)=>{
 const GetProductById=async (req,res)=>{
     try {
         const userid=req.params.id;
-        const [result] = await pool.query(`SELECT * FROM products where productId=${userid}`); 
-        res.status(200).json(result);
+        const [result] = await pool.query(`SELECT * FROM products where productId=${userid}`);
+        const response = {
+          message: "product fetch created",
+          status: 1,
+          products: result
+        }
+        res.status(200).json(response);
       }
        catch (err) {
         console.error(err);
-        res.status(500).send("Error querying database");
+        const response = {
+          message: "failed to get produst",
+          status: 0,
+          products: []
+        }
+        res.status(500).send(response);
       }
 }
 const AddProduct=async (req,res)=>{
@@ -97,6 +108,24 @@ const Categorys = async(req,res)=> {
     const category=req.params.id;
     const [result]=await pool.query(`SELECT * FROM products WHERE category="${category}"`);
     res.status(200).json(result);
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).send("Error querying database");
+  }
+}
+
+const CartQantities =async(req,res)=>{
+  try{
+    const {productId,quantity}=req.body;
+    const [result]=await pool.query(`UPDATE products SET cart=${quantity} WHERE productId=${productId}`);
+    const [product]=await pool.query(`SELECT * FROM products where productId=${productId}`); 
+    const response={
+      message: "Cart quantity updated successfully",
+      status: 1,
+      product:product
+    }
+    res.status(200).json(response);
   }
   catch(err){
     console.error(err);
