@@ -134,4 +134,4 @@ const CartQantities =async(req,res)=>{
 }
 
 
-module.exports={GetAllproducts,GetProductById,AddProduct,UpdateProduct,DeleteProduct,Sort,Categorys,types};
+module.exports={GetAllproducts,GetProductById,AddProduct,UpdateProduct,DeleteProduct,Sort,Categorys,types,CartQantities};
