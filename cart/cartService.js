@@ -28,6 +28,7 @@ const ViewCart= async(req,res)=>{
         const response={
           message:'Cart item fetched successfully',
           status:1,
+          products:result,
           count:count[0]
         }
         res.status(200).json(response);
