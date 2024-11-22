@@ -15,6 +15,7 @@ router.route('/products/category').get(productService.types);
 router.route('/products/categorys/:id').get(productService.Categorys);
 router.route('/products/:id').get(productService.GetProductById);
 router.route('/products/quantities').post(productService.CartQantities);
+router.route('/products/pages').post(productService.limit);
 //For cart service
 
 router.route('/cart/add').post(cartService.AddCart);

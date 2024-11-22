@@ -133,5 +133,24 @@ const CartQantities =async(req,res)=>{
   }
 }
 
+const limit =async(req,res)=>{
+  try{
+    const {limit,offset}=req.body;
+    const [result]=await pool.query(`SELECT * FROM products LIMIT ${limit} OFFSET ${offset}`);
+    const count = await pool.query(`SELECT COUNT(productId) AS totalcount FROM products`);
+    const response={
+      message: "Products fetched successfully",
+      status: 1,
+      products: result,
+      count: count[0]
+    }
+    res.status(200).json(response);
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).send("error querying database");
+  }
+}
 
-module.exports={GetAllproducts,GetProductById,AddProduct,UpdateProduct,DeleteProduct,Sort,Categorys,types,CartQantities};
+
+module.exports={GetAllproducts,GetProductById,AddProduct,UpdateProduct,DeleteProduct,Sort,Categorys,types,CartQantities,limit};
